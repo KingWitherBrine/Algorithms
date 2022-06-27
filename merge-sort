@@ -1,0 +1,33 @@
+def merge_sort(start, end, s):
+    if start >= end:
+        return
+    mid = (start + end) // 2
+    merge_sort(start, mid, s)
+    merge_sort(mid+1, end, s)
+    merge(start, mid, end, s)
+
+def merge(start, mid, end, s):
+    temp = s[start:end+1]
+    left, right, temp_index = start, mid+1, 0
+    while left <= mid and right <= end:
+        if s[left] <= s[right]:
+            temp[temp_index] = s[left]
+            left += 1
+            temp_index += 1
+        else:
+            temp[temp_index] = s[right]
+            right += 1
+            temp_index += 1
+    while left <= mid:
+        temp[temp_index] = s[left]
+        left += 1
+        temp_index += 1
+    while right <= end:
+        temp[temp_index] = s[right]
+        right += 1
+        temp_index += 1
+    for i in range(len(temp)):
+        s[start+i] = temp[i]
+a= [6, 2, 3, 1]
+merge_sort(0, len(a)-1, a)
+print(a)
